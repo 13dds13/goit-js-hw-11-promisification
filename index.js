@@ -1,8 +1,8 @@
 // Задание 1
 
-console.log('------------');
+console.log('------------------------');
 console.log('Задание 1');
-console.log('------------');
+console.log('------------------------');
 
 const delay = ms => {
     return new Promise(resolve => {
@@ -21,77 +21,86 @@ delay(1500).then(logger); // Resolved after 1500ms
 
 // Задание 2
 
-// console.log('-------------');
-// console.log('Задание 2');
-// console.log('-------------');
+setTimeout(() => {
+  console.log('------------------------');
+  console.log('Задание 2');
+  console.log('------------------------');
 
-// const users = [
-//   { name: 'Mango', active: true },
-//   { name: 'Poly', active: false },
-//   { name: 'Ajax', active: true },
-//   { name: 'Lux', active: false },
-// ];
 
-// const toggleUserState = (allUsers, userName) => {
-//     updatedUsers = allUsers.map(user =>
-//         user.name === userName ? { ...user, active: !user.active } : user);
 
-//     return new Promise(resolve => resolve(updatedUsers));
-// };
+const users = [
+  { name: 'Mango', active: true },
+  { name: 'Poly', active: false },
+  { name: 'Ajax', active: true },
+  { name: 'Lux', active: false },
+];
 
-// const logger = updatedUsers => console.table(updatedUsers);
+const toggleUserState = (allUsers, userName) => {
+    updatedUsers = allUsers.map(user =>
+        user.name === userName ? { ...user, active: !user.active } : user);
 
-// toggleUserState(users, 'Mango').then(logger);
-// toggleUserState(users, 'Lux').then(logger);
+    return new Promise(resolve => resolve(updatedUsers));
+};
+
+const loggerTwo = updatedUsers => console.table(updatedUsers);
+
+toggleUserState(users, 'Mango').then(loggerTwo);
+  toggleUserState(users, 'Lux').then(loggerTwo);
+  
+  }, 2500);
 
 //  ===================================================================== //
 
 // Задание 3
+setTimeout(() => {
+  
 
-// console.log('-------------');
-// console.log('Задание 3');
-// console.log('-------------');
+console.log('------------------------');
+console.log('Задание 3');
+console.log('------------------------');
 
-// const randomIntegerFromInterval = (min, max) => {
-//   return Math.floor(Math.random() * (max - min + 1) + min);
-// };
+const randomIntegerFromInterval = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
-// const makeTransaction = (transaction) => {
-//     const delay = randomIntegerFromInterval(200, 500);
-//     const canProcess = Math.random() > 0.3;
+const makeTransaction = ({id}) => {
+    const delay = randomIntegerFromInterval(200, 500);
+    const canProcess = Math.random() > 0.3;
 
-//     const result = new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//             if (canProcess) {
-//             resolve(transaction.id, delay);
-//             } else {
-//             reject(transaction.id);
-//             }
-//         }, delay);})
+    const result = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (canProcess) {
+            resolve({id, delay});
+            } else {
+            reject(id);
+            }
+        }, delay);})
 
-//     return result;
-// };
+    return result;
+};
 
-// const logSuccess = (id, time) => {
-//     console.log(`Transaction ${id} processed in ${time}ms`);
-// };
+const logSuccess = ({id, delay}) => {
+    console.log(`Transaction ${id} processed in ${delay}ms`);
+};
 
-// const logError = id => {
-//     console.warn(`Error processing transaction ${id}. Please try again later.`);
-// };
+const logError = ({id}) => {
+    console.warn(`Error processing transaction ${id}. Please try again later.`);
+};
 
-// makeTransaction({ id: 70, amount: 150 })
-//     .then(logSuccess)
-//     .catch(logError);
+makeTransaction({ id: 70, amount: 150 })
+    .then(logSuccess)
+    .catch(logError);
 
-// makeTransaction({ id: 71, amount: 230 })
-//     .then(logSuccess)
-//     .catch(logError);
+makeTransaction({ id: 71, amount: 230 })
+    .then(logSuccess)
+    .catch(logError);
 
-// makeTransaction({ id: 72, amount: 75 })
-//     .then(logSuccess)
-//     .catch(logError);
+makeTransaction({ id: 72, amount: 75 })
+    .then(logSuccess)
+    .catch(logError);
 
-// makeTransaction({ id: 73, amount: 100 })
-//     .then(logSuccess)
-//     .catch(logError);
+makeTransaction({ id: 73, amount: 100 })
+    .then(logSuccess)
+    .catch(logError);
+
+  }, 3000);
